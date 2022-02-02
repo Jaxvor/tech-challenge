@@ -4,14 +4,21 @@ describe('technical challenge tests', () => {
     })
 
 
-    it('run a search', () => {
+    it('run a search, enter', () => {
         //This is a test of the search functionality. The assert will check the url matches the search term entered to verify
         //the search has progressed to the results page.
         cy.get('#searchbox').type('amiga{enter}')
         cy.url().should('eq', 'https://computer-database.gatling.io/computers?f=amiga')
         cy.contains('Amiga').should('be.visible')
     })
-
+    
+    it('run a search, button', () => {
+        //This is a test of the search functionality. This time it will click the search button rather than hit enter.
+        cy.get('#searchbox').type('amiga')
+        cy.get('#searchsubmit.btn.primary').click()
+        cy.url().should('eq', 'https://computer-database.gatling.io/computers?f=amiga')
+        cy.contains('Amiga').should('be.visible')
+    })
 
     it('add a new computer', () => {
         //This test will test the 'add a new computer' functionality. This test adds a new computer and then
